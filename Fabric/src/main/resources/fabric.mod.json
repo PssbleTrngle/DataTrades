@@ -1,29 +1,26 @@
 {
     "schemaVersion": 1,
-    "id": "modid",
+    "id": "data_villagers",
     "version": "${version}",
   
-    "name": "Example Mod",
+    "name": "Data Villagers",
     "description": "This is an example description! Tell everyone what your mod is about!",
-    "authors": [
-      "Me!"
-    ],
+    "authors": ["possible_triangle"    ],
     "contact": {
-      "homepage": "https://fabricmc.net/",
-      "sources": "https://github.com/FabricMC/fabric-example-mod"
+      "sources": "https://github.com/PssbleTrngle/DataVillagers",
+      "issues": "https://github.com/PssbleTrngle/DataVillagers/issues"
     },
   
     "license": "CC0-1.0",
-    "icon": "assets/modid/icon.png",
   
     "environment": "*",
     "entrypoints": {
       "main": [
-        "com.example.examplemod.ExampleMod"
+        "com.possible_triangle.data_villagers.FabricEntrypoint"
       ]
     },
     "mixins": [
-      "modid.mixins.json"
+      "data_villagers.mixins.json"
     ],
   
     "depends": {
@@ -31,9 +28,6 @@
       "fabric": "*",
       "minecraft": "1.19.x",
       "java": ">=17"
-    },
-    "suggests": {
-      "another-mod": "*"
     }
   }
   

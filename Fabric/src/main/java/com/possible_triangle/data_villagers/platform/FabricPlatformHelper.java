@@ -1,6 +1,6 @@
-package com.example.examplemod.platform;
+package com.possible_triangle.data_villagers.platform;
 
-import com.example.examplemod.platform.services.IPlatformHelper;
+import com.possible_triangle.data_villagers.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class FabricPlatformHelper implements IPlatformHelper {

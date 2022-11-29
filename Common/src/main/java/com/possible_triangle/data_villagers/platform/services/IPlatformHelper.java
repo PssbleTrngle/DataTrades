@@ -1,4 +1,4 @@
-package com.example.examplemod.platform.services;
+package com.possible_triangle.data_villagers.platform.services;
 
 public interface IPlatformHelper {
 

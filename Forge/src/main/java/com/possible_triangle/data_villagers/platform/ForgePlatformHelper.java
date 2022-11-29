@@ -1,6 +1,6 @@
-package com.example.examplemod.platform;
+package com.possible_triangle.data_villagers.platform;
 
-import com.example.examplemod.platform.services.IPlatformHelper;
+import com.possible_triangle.data_villagers.platform.services.IPlatformHelper;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 
