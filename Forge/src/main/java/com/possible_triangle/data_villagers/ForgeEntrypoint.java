@@ -1,6 +1,6 @@
 package com.possible_triangle.data_villagers;
 
-import com.possible_triangle.data_villagers.data.TradeReloader;
+import com.possible_triangle.data_villagers.data.ProfessionReloader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -13,13 +13,13 @@ public class ForgeEntrypoint {
         CommonClass.init();
 
         MinecraftForge.EVENT_BUS.addListener((AddReloadListenerEvent event) -> {
-            event.addListener(new TradeReloader());
+            CommonClass.register((id, it) -> event.addListener(it));
         });
 
         MinecraftForge.EVENT_BUS.addListener((VillagerTradesEvent event) -> {
-            TradeReloader.getDataTrade(event.getType()).ifPresent(dataTrades -> {
-                event.getTrades().put(0, dataTrades.trades());
-            });
+            ProfessionReloader.getDataTrades(event.getType()).ifPresent(it -> it.trades().forEach((level, trades) -> {
+                event.getTrades().put(level.intValue(), trades);
+            }));
         });
     }
 }

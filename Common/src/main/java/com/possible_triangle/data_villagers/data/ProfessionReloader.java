@@ -3,6 +3,7 @@ package com.possible_triangle.data_villagers.data;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.possible_triangle.data_villagers.Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -13,22 +14,27 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-public class TradeReloader extends SimpleJsonResourceReloadListener {
+public class ProfessionReloader extends SimpleJsonResourceReloadListener {
 
     private static final Gson JSON = new Gson();
 
-    public TradeReloader() {
-        super(JSON, "villager_trades");
+    public ProfessionReloader() {
+        super(JSON, "villager/professions");
     }
 
-    private static Map<ResourceLocation, Trades> TRADES = Collections.emptyMap();
+    private static Map<ResourceLocation, Trades> VALUES = Collections.emptyMap();
 
-    public static Optional<Trades> getDataTrade(ResourceLocation id) {
-        return Optional.ofNullable(TRADES.get(id));
+    private static Optional<Trades> getDataTrades(ResourceLocation id) {
+        return Optional.ofNullable(VALUES.get(id));
     }
 
-    public static Optional<Trades> getDataTrade(VillagerProfession profession) {
-        return getDataTrade(new ResourceLocation(profession.name()));
+    public static Optional<Trades> getDataTrades(VillagerProfession profession) {
+        return getDataTrades(new ResourceLocation(profession.name()));
+    }
+
+    @Override
+    protected Map<ResourceLocation, JsonElement> prepare(ResourceManager $$0, ProfilerFiller $$1) {
+        return super.prepare($$0, $$1);
     }
 
     @Override
@@ -40,7 +46,8 @@ public class TradeReloader extends SimpleJsonResourceReloadListener {
             });
         });
 
-        TRADES = parsed.build();
+        VALUES = parsed.build();
+        Constants.LOGGER.info("Loaded villager trades for {} professions", VALUES.size());
     }
 
 }
