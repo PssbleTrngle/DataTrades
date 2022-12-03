@@ -29,7 +29,7 @@ public class ProfessionReloader extends SimpleJsonResourceReloadListener {
     }
 
     public static Optional<Trades> getDataTrades(VillagerProfession profession) {
-        return getDataTrades(new ResourceLocation(profession.name()));
+        return getDataTrades(new ResourceLocation(profession.getName()));
     }
 
     @Override
