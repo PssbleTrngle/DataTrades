@@ -28,8 +28,8 @@ public class FabricEntrypoint implements ModInitializer {
                 }
 
                 @Override
-                public CompletableFuture<Void> reload(PreparationBarrier preparationBarrier, ResourceManager resourceManager, ProfilerFiller profilerFiller, ProfilerFiller profilerFiller2, Executor executor, Executor executor2) {
-                    return inner.reload(preparationBarrier, resourceManager, profilerFiller, profilerFiller2, executor, executor2);
+                public CompletableFuture<Void> reload(PreparationBarrier barrier, ResourceManager manager, ProfilerFiller profiler, ProfilerFiller profiler2, Executor executor, Executor executor2) {
+                    return inner.reload(barrier, manager, profiler, profiler2, executor, executor2);
                 }
             });
         });
