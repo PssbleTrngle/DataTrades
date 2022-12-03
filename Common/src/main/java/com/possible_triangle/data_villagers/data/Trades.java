@@ -17,7 +17,7 @@ public record Trades(boolean disabled, Int2ObjectMap<List<VillagerTrades.ItemLis
 
     public static Optional<Trades> parse(JsonObject json) {
         try {
-            var disabled = json.has("disabled") && GsonHelper.getAsBoolean(json, "disabled");
+            var disabled = GsonHelper.getAsBoolean(json, "disabled", false);
 
             var trades = new Int2ObjectOpenHashMap<List<VillagerTrades.ItemListing>>();
 
