@@ -36,7 +36,7 @@ public class TradesReloader extends SimpleJsonResourceReloadListener {
     protected void apply(Map<ResourceLocation, JsonElement> loaded, ResourceManager manager, ProfilerFiller profiler) {
         var parsed = new ImmutableMap.Builder<ResourceLocation, Trade>();
         loaded.forEach((id, json) -> {
-            Trade.parse(json.getAsJsonObject()).ifPresent(trade -> {
+            Trade.parse(json.getAsJsonObject(), id).ifPresent(trade -> {
                 parsed.put(id, trade);
             });
         });
