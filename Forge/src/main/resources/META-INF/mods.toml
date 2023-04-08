@@ -1,5 +1,5 @@
 modLoader="javafml" 
-loaderVersion="[40,)"
+loaderVersion="[43,)"
 license="All rights reserved"
 
 [[mods]] 
@@ -15,13 +15,13 @@ description='''
 [[dependencies.data_villagers]]
     modId="forge"
     mandatory=true
-    versionRange="[40,)"
+    versionRange="[43,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.data_villagers]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,)"
+    versionRange="[1.19.2,)"
     ordering="NONE"
     side="BOTH"

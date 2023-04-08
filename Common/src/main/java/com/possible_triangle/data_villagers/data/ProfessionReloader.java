@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.Villager;
@@ -22,23 +23,18 @@ public class ProfessionReloader extends SimpleJsonResourceReloadListener {
 
     private static final Gson JSON = new Gson();
 
+    private static Map<ResourceLocation, Profession> VALUES = Collections.emptyMap();
+
     public ProfessionReloader() {
         super(JSON, "villager/professions");
     }
-
-    private static Map<ResourceLocation, Profession> VALUES = Collections.emptyMap();
 
     private static Optional<Profession> getDataTrades(ResourceLocation id) {
         return Optional.ofNullable(VALUES.get(id));
     }
 
     public static Optional<Profession> getDataTrades(VillagerProfession profession) {
-        return getDataTrades(new ResourceLocation(profession.getName()));
-    }
-
-    @Override
-    protected Map<ResourceLocation, JsonElement> prepare(ResourceManager $$0, ProfilerFiller $$1) {
-        return super.prepare($$0, $$1);
+        return getDataTrades(new ResourceLocation(profession.name()));
     }
 
     @Override
@@ -54,7 +50,7 @@ public class ProfessionReloader extends SimpleJsonResourceReloadListener {
         Constants.LOGGER.info("Loaded villager trades for {} professions", VALUES.size());
     }
 
-    public static Optional<LootContext> createContext(Entity entity, Random randomSource) {
+    public static Optional<LootContext> createContext(Entity entity, RandomSource randomSource) {
         if (!(entity.level instanceof ServerLevel world)) return Optional.empty();
         var context = new LootContext.Builder(world)
                 .withParameter(LootContextParams.THIS_ENTITY, entity)

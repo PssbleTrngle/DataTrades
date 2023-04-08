@@ -2,13 +2,13 @@ package com.possible_triangle.data_villagers.data;
 
 import com.possible_triangle.data_villagers.Constants;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.trading.MerchantOffer;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
-import java.util.Random;
 
 public class ReferenceTrade implements VillagerTrades.ItemListing {
 
@@ -24,7 +24,7 @@ public class ReferenceTrade implements VillagerTrades.ItemListing {
 
     @Nullable
     @Override
-    public MerchantOffer getOffer(Entity entity, Random randomSource) {
+    public MerchantOffer getOffer(Entity entity, RandomSource randomSource) {
         if (referenced == null) {
             referenced = TradesReloader.getTrade(id);
             if (referenced.isEmpty()) Constants.LOGGER.warn("Could not find data-trade '{}'", id);

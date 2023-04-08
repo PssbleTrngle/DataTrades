@@ -6,6 +6,7 @@ import com.google.gson.JsonSyntaxException;
 import com.possible_triangle.data_villagers.Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +14,6 @@ import net.minecraft.world.item.trading.MerchantOffer;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
-import java.util.Random;
 
 public record Trade(TradeIngredient wants, @Nullable TradeIngredient wants2, TradeIngredient sells,
                     int uses, int maxUses, int xp,
@@ -52,7 +52,7 @@ public record Trade(TradeIngredient wants, @Nullable TradeIngredient wants2, Tra
     }
 
     @Override
-    public MerchantOffer getOffer(Entity entity, Random randomSource) {
+    public MerchantOffer getOffer(Entity entity, RandomSource randomSource) {
         return ProfessionReloader.createContext(entity, randomSource).map(context -> new MerchantOffer(
                 wants.createStack(context),
                 wants2 != null ? wants2.createStack(context) : ItemStack.EMPTY,

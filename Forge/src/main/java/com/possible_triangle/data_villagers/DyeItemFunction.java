@@ -22,13 +22,13 @@ public class DyeItemFunction extends LootItemConditionalFunction {
         if (!(stack.getItem() instanceof DyeableLeatherItem item)) return stack;
 
         if(context.getRandom().nextInt(5) == 0) {
-            var brightness = context.getRandom().nextFloat(0F, 1F);
+            var brightness = context.getRandom().nextFloat();
             var color = Color.getHSBColor(0F, 0F, brightness);
             item.setColor(stack, color.getRGB());
         } else {
             var hue = context.getRandom().nextFloat();
-            var saturation = context.getRandom().nextFloat(0.4F, 0.95F);
-            var brightness = context.getRandom().nextFloat(0.4F, 0.8F);
+            var saturation = context.getRandom().nextFloat() * 0.55F + 0.4F;
+            var brightness = context.getRandom().nextFloat() * 0.4F + 0.4F;
             var color = Color.getHSBColor(hue, saturation, brightness);
             item.setColor(stack, color.getRGB());
         }

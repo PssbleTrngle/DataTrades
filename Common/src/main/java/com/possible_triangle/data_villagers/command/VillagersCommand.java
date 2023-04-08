@@ -13,6 +13,7 @@ import net.minecraft.world.level.entity.EntityTypeTest;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
+import java.util.Random;
 import java.util.stream.StreamSupport;
 
 public class VillagersCommand {
@@ -44,7 +45,7 @@ public class VillagersCommand {
             if (listings == null) continue;
 
             var shuffled = Arrays.asList(listings);
-            Collections.shuffle(shuffled, villager.getRandom());
+            Collections.shuffle(shuffled, new Random(villager.getRandom().nextLong()));
             shuffled.subList(0, Math.min(shuffled.size(), tradeCount)).stream()
                     .map(it -> it.getOffer(villager, villager.getRandom()))
                     .filter(Objects::nonNull)
