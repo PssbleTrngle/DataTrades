@@ -4,7 +4,7 @@
   "version": "${mod_version}",
 
   "name": "${mod_name}",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Allows easy customization of villager trades using datapacks",
   "authors": ["${mod_author}"],
   "contact": {
     "sources": "https://github.com/${repository}",
