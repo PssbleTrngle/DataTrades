@@ -15,7 +15,7 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": ["com.possible_triangle.data_villagers.FabricEntrypoint"]
+    "main": ["com.possible_triangle.data_trades.FabricEntrypoint"]
   },
   "mixins": ["${mod_id}.mixins.json"],
 
