@@ -43,12 +43,12 @@ jobs:
         if: ${{ github.event_name == 'release' }}
         uses: svenstaro/upload-release-action@v2
         with:
-          file: build/libs/data_trades-forge-${{ github.event.release.tag_name }}.jar
+          file: forge/build/libs/data_trades-forge-${{ github.event.release.tag_name }}.jar
           asset_name: data_trades-forge-${{ github.event.release.tag_name }}.jar
 
       - name: Upload fabric jar to github releases
         if: ${{ github.event_name == 'release' }}
         uses: svenstaro/upload-release-action@v2
         with:
-          file: build/libs/data_trades-fabric-${{ github.event.release.tag_name }}.jar
+          file: fabric/build/libs/data_trades-fabric-${{ github.event.release.tag_name }}.jar
           asset_name: data_trades-fabric-${{ github.event.release.tag_name }}.jar
