@@ -4,7 +4,7 @@
   "version": "${mod_version}",
 
   "name": "${mod_name}",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Allows easy customization of villager trades using datapacks",
   "authors": ["${mod_author}"],
   "contact": {
     "sources": "https://github.com/${repository}",
@@ -15,14 +15,14 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": ["com.possible_triangle.data_villagers.FabricEntrypoint"]
+    "main": ["com.possible_triangle.data_trades.FabricEntrypoint"]
   },
   "mixins": ["${mod_id}.mixins.json"],
 
   "depends": {
     "fabricloader": ">=0.14",
     "fabric": "*",
-    "minecraft": "1.19.x",
+    "minecraft": "~1.20.1",
     "java": ">=17"
   }
 }
