@@ -1,25 +1,25 @@
 modLoader="javafml" 
 loaderVersion="[43,)"
 license="All rights reserved"
+issueTrackerURL = "https://github.com/${repository}/issues"
 
 [[mods]] 
-modId="data_villagers"
-version="${file.jarVersion}" 
+modId="${mod_id}"
+version="${mod_version}" 
  
-displayName="Data Villagers"
-credits="jaredlll08 & Darkhax for the Multiloader Template"
-authors="possible_triangle"
+displayName="${mod_name}"
+authors="${mod_author}"
 description='''
 '''
 
-[[dependencies.data_villagers]]
+[[dependencies.${mod_id}]]
     modId="forge"
     mandatory=true
     versionRange="[43,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.data_villagers]]
+[[dependencies.${mod_id}]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.19.2,)"
