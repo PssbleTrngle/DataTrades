@@ -9,10 +9,6 @@ subprojects {
             githubPackages(this@subprojects)
         }
     }
-
-    tasks.withType<Jar> {
-        exclude("datapacks")
-    }
 }
 
 enableSonarQube()
