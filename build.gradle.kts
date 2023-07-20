@@ -1,6 +1,6 @@
 plugins {
     idea
-    id("net.somethingcatchy.gradle") version ("0.0.6")
+    id("net.somethingcatchy.gradle") version ("0.0.7")
 }
 
 subprojects {
