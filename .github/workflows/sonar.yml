@@ -30,7 +30,7 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Build and upload
+      - name: Build and Analyze
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build sonar
