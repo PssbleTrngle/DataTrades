@@ -11,4 +11,10 @@ subprojects {
     }
 }
 
+allprojects {
+    tasks.withType<Jar> {
+        exclude("datapacks")
+    }
+}
+
 enableSonarQube()

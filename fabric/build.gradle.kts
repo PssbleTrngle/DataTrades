@@ -5,6 +5,4 @@ fabric {
 }
 
 uploadToCurseforge()
-uploadToModrinth {
-    syncBodyFromReadme()
-}
+uploadToModrinth()

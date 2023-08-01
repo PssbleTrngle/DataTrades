@@ -18,7 +18,7 @@ public record Profession(boolean disabled, Int2ObjectMap<TradeLevel> trades) {
 
             var trades = new Int2ObjectOpenHashMap<TradeLevel>();
 
-            var levels = GsonHelper.getAsJsonObject(json, "levels");
+            var levels = GsonHelper.getAsJsonObject(json, "levels", new JsonObject());
 
             levels.entrySet().forEach(entry -> {
                 var level = Integer.parseInt(entry.getKey());
