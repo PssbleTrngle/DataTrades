@@ -1,6 +1,6 @@
 {
   "sells": {
-    "tag": "minecraft:base_stone_overworld",
+    "tag": "minecraft:stone_tool_materials",
     "count": 22
   },
   "wants": [

@@ -51,7 +51,7 @@
             "item": "leather_chestplate",
             "functions": [
               {
-                "function": "data_villagers:dye_item"
+                "function": "data_trades:dye_item"
               }
             ]
           },
