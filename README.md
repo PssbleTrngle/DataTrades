@@ -14,6 +14,14 @@
 [![Issues](https://img.shields.io/github/issues/PssbleTrngle/DataTrades?label=Issues)][ISSUES]
 [![Modrinth](https://img.shields.io/modrinth/dt/nm1MuVrD?color=green&logo=modrinth&logoColor=green)][MODRINTH]
 
+<!-- modrinth_exclude.end -->
+
+This mod adds the ability for players, serverowners or modpack creators to overwrite villager trades using datapacks.
+The amount of trades per level and the actual items traded can be customized using json files.
+A command for development purposes called `/villagers refresh` will manually trigger a re-asign of trades to all loaded villagers.
+
+<!-- modrinth_exclude.start -->
+
 * [Folder Structure](#folder-structure)
 * [Examples](#examples)
 * [JSON Schema](#json-schema)
@@ -24,7 +32,6 @@
 * [Advanced Usage](#advanced-usage)
 
 <!-- modrinth_exclude.end -->
-
 ## Folder Structure
 
 Using a datapack, the trades of a specific villager profession can be overwritten by creating a JSON file following this
@@ -78,9 +85,9 @@ The keys represent the actual villagers level with *1* being *Novice* until *5* 
 
 ### *TradeIngredient*
 
-Extension of the vanilla `Ingredient` with a few extra properties. 
+Extension of the vanilla `Ingredient` with a few extra properties.
 They can take the form of an item or tag and specify all properties of the vanilla Ingredient JSON.
-Since Villager trades are `ItemStack` based that does not mean that a player can pay a `#minecraft:stone_tool_materials` 
+Since Villager trades are `ItemStack` based that does not mean that a player can pay a `#minecraft:stone_tool_materials`
 with any stone type, but only the one that is randomly selected from the tag each time the trade is used.
 
 | Property  | Type                                                                | Default |
