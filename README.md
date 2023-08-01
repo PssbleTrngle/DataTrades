@@ -17,10 +17,10 @@
 * [Folder Structure](#folder-structure)
 * [Examples](#examples)
 * [JSON Schema](#json-schema)
-    + [*Profession*](#-profession-)
-    + [*TradeLevel*](#-tradelevel-)
-    + [*Trade*](#-trade-)
-    + [*TradeIngredient*](#-tradeingredient-)
+    + [*Profession*](#profession)
+    + [*TradeLevel*](#tradelevel)
+    + [*Trade*](#trade)
+    + [*TradeIngredient*](#tradeingredient)
 * [Advanced Usage](#advanced-usage)
 
 <!-- modrinth_exclude.end -->
