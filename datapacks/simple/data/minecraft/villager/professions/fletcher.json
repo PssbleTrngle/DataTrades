@@ -1,0 +1,85 @@
+{
+  "levels": {
+    "1": {
+      "take": {
+        "type": "constant",
+        "value": 5
+      },
+      "trades": [
+        {
+          "sells": {
+            "item": "diamond_sword"
+          },
+          "wants": [
+            {
+              "item": "dirt"
+            }
+          ]
+        },
+        {
+          "sells": {
+            "item": "diamond_axe"
+          },
+          "wants": [
+            {
+              "item": "dirt"
+            }
+          ]
+        },
+        {
+          "sells": {
+            "item": "diamond_pickaxe"
+          },
+          "wants": [
+            {
+              "item": "dirt"
+            }
+          ]
+        },
+        {
+          "sells": {
+            "item": "diamond_shovel"
+          },
+          "wants": [
+            {
+              "item": "dirt"
+            }
+          ]
+        },
+        {
+          "sells": {
+            "item": "leather_chestplate",
+            "functions": [
+              {
+                "function": "data_villagers:dye_item"
+              }
+            ]
+          },
+          "wants": [
+            {
+              "item": "cobblestone"
+            }
+          ]
+        }
+      ]
+    },
+    "2": {
+      "take": {
+        "type": "constant",
+        "value": 1
+      },
+      "trades": [
+        {
+          "sells": {
+            "item": "command_block"
+          },
+          "wants": [
+            {
+              "item": "calcite"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "levels": {
+    "1": {
+      "take": {
+        "type": "uniform",
+        "value": {
+          "min_inclusive": 1,
+          "max_inclusive": 3
+        }
+      },
+      "trades": [
+        "minecraft:example_1",
+        "minecraft:example_2"
+      ]
+    },
+    "2": {
+      "take": {
+        "type": "constant",
+        "value": 2
+      },
+      "trades": [
+        "minecraft:example_1"
+      ]
+    }
+  }
+}

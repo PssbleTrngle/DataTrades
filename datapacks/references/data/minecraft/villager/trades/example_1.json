@@ -1,0 +1,11 @@
+{
+  "sells": {
+    "tag": "minecraft:base_stone_overworld",
+    "count": 22
+  },
+  "wants": [
+    {
+      "item": "minecraft:diamond_block"
+    }
+  ]
+}

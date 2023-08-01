@@ -1,0 +1,13 @@
+{
+  "levels": {
+    "1": {
+      "take": {
+        "type": "constant",
+        "value": 4
+      },
+      "trades": [
+        "minecraft:example_2"
+      ]
+    }
+  }
+}
