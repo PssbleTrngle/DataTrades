@@ -2,6 +2,7 @@ package com.possible_triangle.data_trades;
 
 import com.possible_triangle.data_trades.command.VillagersCommand;
 import com.possible_triangle.data_trades.data.ProfessionReloader;
+import com.possible_triangle.data_trades.platform.ForgePlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
@@ -18,13 +19,10 @@ import net.minecraftforge.registries.RegistryObject;
 @Mod(Constants.MOD_ID)
 public class ForgeEntrypoint {
 
-    private static final DeferredRegister<LootItemFunctionType> ITEM_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, Constants.MOD_ID);
-    public static final RegistryObject<LootItemFunctionType> DYE_ITEM_FUNCTION = ITEM_FUNCTIONS.register("dye_item", () -> new LootItemFunctionType(new DyeItemFunction.Serializer()));
-
     public ForgeEntrypoint() {
         CommonClass.init();
 
-        ITEM_FUNCTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ForgePlatformHelper.ITEM_FUNCTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         MinecraftForge.EVENT_BUS.addListener((AddReloadListenerEvent event) -> {
             CommonClass.register((id, it) -> event.addListener(it));
