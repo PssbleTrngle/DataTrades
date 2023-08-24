@@ -38,7 +38,7 @@ public class DyeItemFunction extends LootItemConditionalFunction {
 
     @Override
     public LootItemFunctionType getType() {
-        return ForgeEntrypoint.DYE_ITEM_FUNCTION.get();
+        return CommonClass.DYE_ITEM_FUNCTION.get();
     }
 
     public static class Serializer extends LootItemConditionalFunction.Serializer<DyeItemFunction> {

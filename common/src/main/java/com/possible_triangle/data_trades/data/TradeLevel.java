@@ -25,7 +25,7 @@ public record TradeLevel(List<VillagerTrades.ItemListing> listings, @Nullable Nu
             var trades = GsonHelper.getAsJsonArray(json, "trades", new JsonArray());
             for (int i = 0; i < trades.size(); i++) {
                 var element = trades.get(i);
-                var indexedId = new ResourceLocation(profession.getNamespace(), "%s[%s][%s]".formatted(profession.getPath(), level, i));
+                var indexedId = new ResourceLocation(profession.getNamespace(), "%s/%s/%s".formatted(profession.getPath(), level, i));
                 if (element.isJsonObject()) Trade.parse(element.getAsJsonObject(), indexedId).ifPresent(listings::add);
                 else listings.add(new ReferenceTrade(new ResourceLocation(element.getAsString())));
             }
