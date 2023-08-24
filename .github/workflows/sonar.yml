@@ -1,12 +1,12 @@
 name: Analyze
 on:
   push:
+    branches: ["[0-9]+.[0-9]+.x"]
 
 jobs:
   build:
     name: Analyze
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     permissions:
       contents: read
     steps:
