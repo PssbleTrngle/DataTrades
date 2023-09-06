@@ -1,6 +1,7 @@
 package com.possible_triangle.data_trades.data;
 
 import com.google.common.collect.ImmutableList;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.possible_triangle.data_trades.Constants;
@@ -11,13 +12,18 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
+
+import static com.possible_triangle.data_trades.CommonClass.LOOT_GSON;
 
 public record Trade(TradeIngredient wants, @Nullable TradeIngredient wants2, TradeIngredient sells,
                     int uses, int maxUses, int xp,
-                    float priceMultiplier, int demand) implements VillagerTrades.ItemListing {
+                    float priceMultiplier, int demand,
+                    List<LootItemCondition> conditions) implements VillagerTrades.ItemListing {
 
     public static Optional<Trade> parse(JsonObject json, ResourceLocation id) {
         try {
@@ -43,7 +49,14 @@ public record Trade(TradeIngredient wants, @Nullable TradeIngredient wants2, Tra
             float priceMultiplier = GsonHelper.getAsFloat(json, "priceMultiplier", 2F);
             int demand = GsonHelper.getAsInt(json, "demand", 0);
 
-            var trade = new Trade(wants.get(0), wants.size() > 1 ? wants.get(1) : null, sells, uses, maxUses, xp, priceMultiplier, demand);
+            var conditionsBuilder = new ImmutableList.Builder<LootItemCondition>();
+
+            for (var element : GsonHelper.getAsJsonArray(json, "conditions", new JsonArray())) {
+                var condition = LOOT_GSON.fromJson(element, LootItemCondition.class);
+                conditionsBuilder.add(condition);
+            }
+
+            var trade = new Trade(wants.get(0), wants.size() > 1 ? wants.get(1) : null, sells, uses, maxUses, xp, priceMultiplier, demand, conditionsBuilder.build());
             return Optional.of(trade);
         } catch (JsonSyntaxException ex) {
             Constants.LOGGER.error("Error loading trade '{}': {}", id, ex.getMessage());

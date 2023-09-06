@@ -22,7 +22,7 @@ public record Profession(boolean disabled, Int2ObjectMap<TradeLevel> trades) {
 
             levels.entrySet().forEach(entry -> {
                 var level = Integer.parseInt(entry.getKey());
-                TradeLevel.parse(entry.getValue().getAsJsonObject(), id, level).ifPresent(parsed -> {
+                TradeLevel.parse(entry.getValue().getAsJsonObject(), id, "level-" + level).ifPresent(parsed -> {
                     trades.put(level, parsed);
                 });
             });

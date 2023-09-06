@@ -2,6 +2,7 @@ package com.possible_triangle.data_trades;
 
 import com.possible_triangle.data_trades.command.VillagersCommand;
 import com.possible_triangle.data_trades.data.ProfessionReloader;
+import com.possible_triangle.data_trades.data.TraderReloader;
 import com.possible_triangle.data_trades.platform.ForgePlatformHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -31,6 +32,17 @@ public class ForgeEntrypoint {
         });
 
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, (WandererTradesEvent event) -> {
+            TraderReloader.INSTANCE.getTrader().ifPresent(trader -> {
+                if(trader.genericTrades() != null) {
+                    event.getGenericTrades().clear();
+                    event.getGenericTrades().addAll(trader.genericTrades().listings());
+                }
+
+                if(trader.rareTrades() != null) {
+                    event.getRareTrades().clear();
+                    event.getRareTrades().addAll(trader.rareTrades().listings());
+                }
+            });
         });
 
         MinecraftForge.EVENT_BUS.addListener((RegisterCommandsEvent event) -> {

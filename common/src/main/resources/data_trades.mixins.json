@@ -3,7 +3,11 @@
   "minVersion": "0.8",
   "package": "com.possible_triangle.data_trades.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": ["VillagerMixin"],
+  "mixins": [
+    "AbstractVillagerAccessor",
+    "VillagerMixin",
+    "WanderingTraderMixin"
+  ],
   "client": [],
   "injectors": {
     "defaultRequire": 1
