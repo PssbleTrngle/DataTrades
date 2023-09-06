@@ -3,18 +3,14 @@ package com.possible_triangle.data_trades;
 import com.possible_triangle.data_trades.command.VillagersCommand;
 import com.possible_triangle.data_trades.data.ProfessionReloader;
 import com.possible_triangle.data_trades.platform.ForgePlatformHelper;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 
 @Mod(Constants.MOD_ID)
 public class ForgeEntrypoint {
@@ -29,9 +25,12 @@ public class ForgeEntrypoint {
         });
 
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, (VillagerTradesEvent event) -> {
-            ProfessionReloader.getDataTrades(event.getType()).ifPresent(it -> it.trades().forEach((level, trades) -> {
+            ProfessionReloader.INSTANCE.getDataTrades(event.getType()).ifPresent(it -> it.trades().forEach((level, trades) -> {
                 event.getTrades().put(level.intValue(), trades.listings());
             }));
+        });
+
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, (WandererTradesEvent event) -> {
         });
 
         MinecraftForge.EVENT_BUS.addListener((RegisterCommandsEvent event) -> {

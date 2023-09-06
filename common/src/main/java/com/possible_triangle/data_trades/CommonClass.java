@@ -22,8 +22,8 @@ public class CommonClass {
     }
 
     public static void register(BiConsumer<String, PreparableReloadListener> registerResource) {
-        registerResource.accept("trades", new TradesReloader());
-        registerResource.accept("professions", new ProfessionReloader());
+        registerResource.accept("trades", TradesReloader.INSTANCE);
+        registerResource.accept("professions", ProfessionReloader.INSTANCE);
     }
 
 }

@@ -41,7 +41,7 @@ public class VillagersCommand {
 
         for (int level = 1; level <= data.getLevel(); level++) {
             var listings = trades.get(level);
-            var tradeCount = ProfessionReloader.takeTradesAmount(villager, level).orElse(2);
+            var tradeCount = ProfessionReloader.INSTANCE.takeTradesAmount(villager, level).orElse(2);
             if (listings == null) continue;
 
             var shuffled = Arrays.asList(listings);
