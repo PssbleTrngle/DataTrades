@@ -6,7 +6,7 @@ import com.possible_triangle.data_trades.Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public record Trader(boolean disabled, @Nullable TradeLevel genericTrades, @Nullable TradeLevel rareTrades) {
