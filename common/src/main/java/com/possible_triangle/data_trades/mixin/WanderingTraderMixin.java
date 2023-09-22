@@ -8,9 +8,8 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(WanderingTrader.class)
-public abstract class WanderingTraderMixin {
+public class WanderingTraderMixin {
 
-    // TODO this only works for generic trades
     @ModifyConstant(method = "updateTrades()V", constant = @Constant(intValue = 5))
     private int injected(int value) {
         var self = (WanderingTrader) (Object) this;

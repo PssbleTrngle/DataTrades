@@ -47,7 +47,7 @@ public class VillagersCommand {
         var offers = new MerchantOffers();
 
         {
-            var trades = VillagerTrades.WANDERING_TRADER_TRADES.get(0);
+            var trades = VillagerTrades.WANDERING_TRADER_TRADES.get(1);
             var tradeCount = TraderReloader.INSTANCE.takeTradesAmount(trader, Trader::genericTrades).orElse(5);
 
             var shuffled = Arrays.asList(trades);
@@ -59,8 +59,8 @@ public class VillagersCommand {
         }
 
         {
-            var trades = VillagerTrades.WANDERING_TRADER_TRADES.get(1);
-            var tradeCount = TraderReloader.INSTANCE.takeTradesAmount(trader, Trader::rareTrades).orElse(1);
+            var trades = VillagerTrades.WANDERING_TRADER_TRADES.get(2);
+            var tradeCount = 1;
 
             var shuffled = Arrays.asList(trades);
             Collections.shuffle(shuffled, new Random(trader.getRandom().nextLong()));
