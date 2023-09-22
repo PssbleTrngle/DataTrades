@@ -2,6 +2,7 @@ package com.possible_triangle.data_trades;
 
 import com.google.gson.Gson;
 import com.possible_triangle.data_trades.data.ProfessionReloader;
+import com.possible_triangle.data_trades.data.TraderReloader;
 import com.possible_triangle.data_trades.data.TradesReloader;
 import com.possible_triangle.data_trades.platform.Services;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
@@ -21,8 +22,9 @@ public class CommonClass {
     }
 
     public static void register(BiConsumer<String, PreparableReloadListener> registerResource) {
-        registerResource.accept("trades", new TradesReloader());
-        registerResource.accept("professions", new ProfessionReloader());
+        registerResource.accept("trades", TradesReloader.INSTANCE);
+        registerResource.accept("professions", ProfessionReloader.INSTANCE);
+        registerResource.accept("professions", TraderReloader.INSTANCE);
     }
 
 }
