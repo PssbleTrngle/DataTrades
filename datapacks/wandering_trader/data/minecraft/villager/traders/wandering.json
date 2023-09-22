@@ -1,0 +1,111 @@
+{
+  "generic": {
+    "take": {
+      "type": "constant",
+      "value": 3
+    },
+    "trades": [
+      {
+        "sells": {
+          "item": "string",
+          "count": 22
+        },
+        "wants": [
+          {
+            "item": "redstone",
+            "count": 4
+          }
+        ]
+      }, {
+        "sells": {
+          "item": "bundle"
+        },
+        "wants": [
+          {
+            "item": "redstone",
+            "count": 12
+          }
+        ]
+      }, {
+        "sells": {
+          "item": "blue_ice"
+        },
+        "wants": [
+          {
+            "item": "redstone",
+            "count": 7
+          }
+        ]
+      }, {
+        "sells": {
+          "item": "lily_pad"
+        },
+        "wants": [
+          {
+            "item": "redstone",
+            "count": 18
+          }
+        ]
+      }, {
+        "sells": {
+          "item": "wither_skeleton_skull"
+        },
+        "wants": [
+          {
+            "item": "redstone",
+            "count": 64
+          }
+        ]
+      }
+    ]
+  },
+  "rare": {
+    "take": {
+      "type": "constant",
+      "value": 2
+    },
+    "trades": [
+      {
+        "sells": {
+          "item": "chainmail_boots"
+        },
+        "wants": [
+          {
+            "item": "lapis_lazuli",
+            "count": 14
+          }
+        ]
+      }, {
+        "sells": {
+          "item": "chainmail_chestplate"
+        },
+        "wants": [
+          {
+            "item": "lapis_lazuli",
+            "count": 14
+          }
+        ]
+      }, {
+        "sells": {
+          "item": "chainmail_leggings"
+        },
+        "wants": [
+          {
+            "item": "lapis_lazuli",
+            "count": 14
+          }
+        ]
+      }, {
+        "sells": {
+          "item": "chainmail_helmet"
+        },
+        "wants": [
+          {
+            "item": "lapis_lazuli",
+            "count": 14
+          }
+        ]
+      }
+    ]
+  }
+}
