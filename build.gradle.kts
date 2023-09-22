@@ -1,6 +1,6 @@
 plugins {
     idea
-    id("com.possible-triangle.gradle") version ("0.1.0")
+    id("net.somethingcatchy.gradle") version ("0.0.7")
 }
 
 subprojects {
