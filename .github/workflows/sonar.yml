@@ -1,5 +1,6 @@
-name: Analyze
+name: Build & Analyze
 on:
+  workflow_dispatch:
   push:
     branches: ["[0-9]+.[0-9]+.x"]
 
@@ -7,9 +8,7 @@ jobs:
   build:
     name: Analyze
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,12 +30,12 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Build and Analyze
+      - name: Build and upload
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build sonar
         env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           CI: true
