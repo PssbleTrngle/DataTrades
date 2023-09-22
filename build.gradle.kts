@@ -1,13 +1,11 @@
 plugins {
     idea
-    id("net.somethingcatchy.gradle") version ("0.0.7")
+    id("com.possible-triangle.gradle") version ("0.1.1")
 }
 
 subprojects {
     enablePublishing {
-        repositories {
-            githubPackages(this@subprojects)
-        }
+        githubPackages()
     }
 }
 

@@ -1,0 +1,13 @@
+{
+  "sells": {
+    "item": "stone_sword"
+  },
+  "wants": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "tag": "minecraft:flowers"
+    }
+  ]
+}
