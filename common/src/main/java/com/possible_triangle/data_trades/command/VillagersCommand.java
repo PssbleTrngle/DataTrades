@@ -2,12 +2,14 @@ package com.possible_triangle.data_trades.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.possible_triangle.data_trades.data.ProfessionReloader;
 import com.possible_triangle.data_trades.data.Trader;
 import com.possible_triangle.data_trades.data.TraderReloader;
 import com.possible_triangle.data_trades.mixin.AbstractVillagerAccessor;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -19,27 +21,42 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class VillagersCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("villagers").requires(it -> it.hasPermission(3))
-                .then(Commands.literal("refresh").executes(VillagersCommand::resetVillagers))
+                .then(Commands.literal("refresh").executes(VillagersCommand::resetAllVillagers)
+                        .then(Commands.argument("target", EntityArgument.entities())
+                                .executes(VillagersCommand::resetTargetedVillagers)
+                        )
+                )
         );
     }
 
-    private static int resetVillagers(CommandContext<CommandSourceStack> context) {
+    private static int resetVillagers(Stream<AbstractVillager> villagers) {
+        return (int) villagers.filter(VillagersCommand::reset).count();
+    }
+
+    private static int resetTargetedVillagers(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        var targets = EntityArgument.getEntities(context, "target").stream()
+                .filter(AbstractVillager.class::isInstance)
+                .map(it -> (AbstractVillager) it);
+        return resetVillagers(targets);
+    }
+
+    private static int resetAllVillagers(CommandContext<CommandSourceStack> context) {
         var server = context.getSource().getServer();
-        return (int) StreamSupport.stream(server.getAllLevels().spliterator(), false)
-                .flatMap(level -> level.getEntities(EntityTypeTest.forClass(AbstractVillager.class), $ -> true).stream()
-                        .filter(VillagersCommand::reset))
-                .count();
+        return resetVillagers(StreamSupport.stream(server.getAllLevels().spliterator(), false)
+                .flatMap(level -> level.getEntities(EntityTypeTest.forClass(AbstractVillager.class), $ -> true).stream())
+        );
     }
 
     private static boolean reset(AbstractVillager entity) {
-        if(entity instanceof WanderingTrader trader) return resetTrader(trader);
-        if(entity instanceof Villager villager) return resetVillager(villager);
+        if (entity instanceof WanderingTrader trader) return resetTrader(trader);
+        if (entity instanceof Villager villager) return resetVillager(villager);
         return false;
     }
 
@@ -60,7 +77,7 @@ public class VillagersCommand {
 
         {
             var trades = VillagerTrades.WANDERING_TRADER_TRADES.get(2);
-            var tradeCount = 1;
+            var tradeCount = TraderReloader.INSTANCE.takeTradesAmount(trader, Trader::rareTrades).orElse(1);
 
             var shuffled = Arrays.asList(trades);
             Collections.shuffle(shuffled, new Random(trader.getRandom().nextLong()));

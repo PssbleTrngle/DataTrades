@@ -1,11 +1,10 @@
 package com.possible_triangle.data_trades;
 
+import com.possible_triangle.data_trades.command.VillagersCommand;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.impl.biome.modification.BuiltInRegistryKeys;
-import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -19,6 +18,12 @@ public class FabricEntrypoint implements ModInitializer {
     @Override
     public void onInitialize() {
         CommonClass.init();
+
+        FabricTradeManager.register();
+
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
+                VillagersCommand.register(dispatcher)
+        );
 
         var manager = ResourceManagerHelper.get(PackType.SERVER_DATA);
         CommonClass.register((name, inner) -> {
