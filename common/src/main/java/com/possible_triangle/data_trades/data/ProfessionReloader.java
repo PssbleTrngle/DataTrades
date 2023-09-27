@@ -43,8 +43,9 @@ public class ProfessionReloader extends DataJsonReloader<Profession> {
     public static Optional<LootContext> createContext(Entity entity) {
         if (!(entity.level() instanceof ServerLevel world)) return Optional.empty();
         var params = new LootParams.Builder(world)
+                .withParameter(LootContextParams.ORIGIN, entity.position())
                 .withParameter(LootContextParams.THIS_ENTITY, entity)
-                .create(LootContextParamSets.EMPTY);
+                .create(LootContextParamSets.SELECTOR);
         var context = new LootContext.Builder(params)
                 .create(lootSequenceId(entity));
         return Optional.of(context);
