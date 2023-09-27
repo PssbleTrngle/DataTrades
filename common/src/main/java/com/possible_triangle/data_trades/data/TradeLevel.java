@@ -38,4 +38,8 @@ public record TradeLevel(List<VillagerTrades.ItemListing> listings, @Nullable Nu
             return Optional.empty();
         }
     }
+
+    public VillagerTrades.ItemListing[] listingsArray() {
+        return listings.toArray(VillagerTrades.ItemListing[]::new);
+    }
 }

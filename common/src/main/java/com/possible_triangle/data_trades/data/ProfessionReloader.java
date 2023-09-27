@@ -1,7 +1,6 @@
 package com.possible_triangle.data_trades.data;
 
 import com.google.gson.JsonObject;
-import com.possible_triangle.data_trades.Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -35,9 +34,10 @@ public class ProfessionReloader extends DataJsonReloader<Profession> {
     public static Optional<LootContext> createContext(Entity entity, RandomSource randomSource) {
         if (!(entity.level instanceof ServerLevel world)) return Optional.empty();
         var context = new LootContext.Builder(world)
+                .withParameter(LootContextParams.ORIGIN, entity.position())
                 .withParameter(LootContextParams.THIS_ENTITY, entity)
                 .withRandom(randomSource)
-                .create(LootContextParamSets.EMPTY);
+                .create(LootContextParamSets.SELECTOR);
         return Optional.of(context);
     }
 

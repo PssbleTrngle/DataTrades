@@ -16,11 +16,11 @@ public record Trader(boolean disabled, @Nullable TradeLevel genericTrades, @Null
             var disabled = GsonHelper.getAsBoolean(json, "disabled", false);
 
             var genericTrades = TradeLevel.parse(json.getAsJsonObject("generic"), id, "generic");
-            var specialTrades = TradeLevel.parse(json.getAsJsonObject("rare"), id, "rare");
+            var rareTrades = TradeLevel.parse(json.getAsJsonObject("rare"), id, "rare");
 
-            if (genericTrades.isEmpty() && specialTrades.isEmpty()) return Optional.empty();
+            if (genericTrades.isEmpty() && rareTrades.isEmpty()) return Optional.empty();
 
-            return Optional.of(new Trader(disabled, genericTrades.orElse(null), specialTrades.orElse(null)));
+            return Optional.of(new Trader(disabled, genericTrades.orElse(null), rareTrades.orElse(null)));
         } catch (JsonSyntaxException ex) {
             Constants.LOGGER.error("Error loading trader '{}': {}", id, ex.getMessage());
             return Optional.empty();
