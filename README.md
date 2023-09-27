@@ -44,6 +44,13 @@ data/[namespace]/villager/professions/[path].json
 `[namespace]` and `[path]` should be overwritten by the specific villager professions ID.
 For example, to create trades for the `minecraft:fletcher` profession,
 a file under `data/minecraft/villager/professions/fletcher.json` should be created.
+It's content should follow the [*Profession*](#profession) Schema
+
+Similar, the wandering trader can be overwritten by adding a file at
+```
+data/minecraft/villager/traders/wandering.json
+```
+following the [*Trader*](#trader) Schema
 
 ## Examples
 
@@ -57,11 +64,20 @@ The JSON file should contain an object with these properties:
 
 | Property | Type                  | Default | Description                |
 |----------|-----------------------|---------|----------------------------|
-| disabled | *boolean*             | `false` | disables entire profession |
 | levels   | *map<int,TradeLevel>* | `{}`    | *see below*                |
 
 The `levels` object takes the form of a map with numeric keys and object values.
 The keys represent the actual villagers level with *1* being *Novice* until *5* being *Master*.
+
+### *Trader*
+
+| Property | Type         | Default | Description    |
+|----------|--------------|---------|----------------|
+| generic  | *TradeLevel* | `null`  | generic trades |
+| rare     | *TradeLevel* | `null`  | rare trades    |
+
+In vanilla minecraft, each wandering trader chooses 5 generic and 1 rare trades once it spawns.
+Both the trades themselves and their count can be overwritten using the same format as the one used for a villager's level.
 
 ### *TradeLevel*
 
@@ -94,6 +110,9 @@ with any stone type, but only the one that is randomly selected from the tag eac
 |-----------|---------------------------------------------------------------------|---------|
 | functions | *[LootFunction](https://minecraft.fandom.com/wiki/Item_modifier)*[] | `[]`    |
 | count     | *int*                                                               | `null`  |
+
+The `levels` object takes the form of a map with numeric keys and object values.
+The keys represent the actual villagers level with *1* being *Novice* until *5* being *Master*.
 
 ## Advanced Usage
 
