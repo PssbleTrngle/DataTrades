@@ -83,7 +83,7 @@ Both the trades themselves and their count can be overwritten using the same for
 
 | Property | Type                                                                                  | Default | Description                                                   |
 |----------|---------------------------------------------------------------------------------------|---------|---------------------------------------------------------------|
-| take     | *[NumberProvider](https://minecraft.fandom.com/wiki/Configured_feature/int_provider)* | `null`  | amount of trades added by this level                          |
+| take     | *[NumberProvider](https://minecraft.wiki/w/Loot_table#Number_provider)* | `null`  | amount of trades added by this level                          |
 | trades   | (*Trade* \| *string*)[]                                                               | `[]`    | list of trades from which the taken ones are randomly choosen |
 
 ### *Trade*
@@ -108,7 +108,7 @@ with any stone type, but only the one that is randomly selected from the tag eac
 
 | Property  | Type                                                                | Default |
 |-----------|---------------------------------------------------------------------|---------|
-| functions | *[LootFunction](https://minecraft.fandom.com/wiki/Item_modifier)*[] | `[]`    |
+| functions | *[LootFunction](https://minecraft.wiki/w/Item_modifier)*[] | `[]`    |
 | count     | *int*                                                               | `null`  |
 
 The `levels` object takes the form of a map with numeric keys and object values.
