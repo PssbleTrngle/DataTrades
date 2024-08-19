@@ -12,7 +12,7 @@ public class TraderReloader extends DataJsonReloader<Trader> {
 
     public static final TraderReloader INSTANCE = new TraderReloader();
 
-    private static final ResourceLocation WANDERING_TRADER = new ResourceLocation("wandering");
+    private static final ResourceLocation WANDERING_TRADER = ResourceLocation.withDefaultNamespace("wandering");
 
     private TraderReloader() {
         super("traders");

@@ -3,35 +3,35 @@ package com.possible_triangle.data_trades;
 import com.possible_triangle.data_trades.command.VillagersCommand;
 import com.possible_triangle.data_trades.data.ProfessionReloader;
 import com.possible_triangle.data_trades.data.TraderReloader;
-import com.possible_triangle.data_trades.platform.ForgePlatformHelper;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.event.village.WandererTradesEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import com.possible_triangle.data_trades.platform.NeoforgePlatformHelper;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+import net.neoforged.neoforge.event.village.WandererTradesEvent;
 
 @Mod(Constants.MOD_ID)
-public class ForgeEntrypoint {
+public class NeoforgeEntrypoint {
 
-    public ForgeEntrypoint() {
+    public NeoforgeEntrypoint(IEventBus modBus) {
         CommonClass.init();
 
-        ForgePlatformHelper.ITEM_FUNCTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        NeoforgePlatformHelper.ITEM_FUNCTIONS.register(modBus);
 
-        MinecraftForge.EVENT_BUS.addListener((AddReloadListenerEvent event) -> {
+        NeoForge.EVENT_BUS.addListener((AddReloadListenerEvent event) -> {
             CommonClass.register((id, it) -> event.addListener(it));
         });
 
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, (VillagerTradesEvent event) -> {
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, (VillagerTradesEvent event) -> {
             ProfessionReloader.INSTANCE.getDataTrades(event.getType()).ifPresent(it -> it.trades().forEach((level, trades) -> {
                 event.getTrades().put(level.intValue(), trades.listings());
             }));
         });
 
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, (WandererTradesEvent event) -> {
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, (WandererTradesEvent event) -> {
             TraderReloader.INSTANCE.getTrader().ifPresent(trader -> {
                 if(trader.genericTrades() != null) {
                     event.getGenericTrades().clear();
@@ -45,7 +45,7 @@ public class ForgeEntrypoint {
             });
         });
 
-        MinecraftForge.EVENT_BUS.addListener((RegisterCommandsEvent event) -> {
+        NeoForge.EVENT_BUS.addListener((RegisterCommandsEvent event) -> {
             VillagersCommand.register(event.getDispatcher());
         });
     }

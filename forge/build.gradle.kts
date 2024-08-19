@@ -1,6 +1,4 @@
-forge {
-    enableMixins()
-
+neoforge {
     dependOn(project(":common"))
 }
 

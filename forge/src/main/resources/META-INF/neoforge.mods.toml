@@ -1,5 +1,5 @@
 modLoader="javafml" 
-loaderVersion="[47,)"
+loaderVersion="[4,)"
 license="All rights reserved"
 issueTrackerURL = "https://github.com/${repository}/issues"
 
@@ -13,16 +13,19 @@ description='''
 Allows easy customization of villager trades using datapacks
 '''
 
+[[mixins]]
+config = "${mod_id}.neoforge.mixins.json"
+
 [[dependencies.${mod_id}]]
-    modId="forge"
+    modId="neoforge"
     mandatory=true
-    versionRange="[47,)"
+    versionRange="[21,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20.1,)"
+    versionRange="[1.21.1,)"
     ordering="NONE"
     side="BOTH"

@@ -27,7 +27,7 @@ public class FabricEntrypoint implements ModInitializer {
 
         var manager = ResourceManagerHelper.get(PackType.SERVER_DATA);
         CommonClass.register((name, inner) -> {
-            var id = new ResourceLocation(Constants.MOD_ID, name);
+            var id = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
             manager.registerReloadListener(new IdentifiableResourceReloadListener() {
 
                 @Override

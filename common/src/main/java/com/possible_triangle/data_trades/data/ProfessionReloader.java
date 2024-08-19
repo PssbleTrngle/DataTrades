@@ -20,8 +20,6 @@ public class ProfessionReloader extends DataJsonReloader<Profession> {
 
     public static final ProfessionReloader INSTANCE = new ProfessionReloader();
 
-    private static final ResourceLocation FALLBACK_TABLE_ID = new ResourceLocation(Constants.MOD_ID, "unknown_entity");
-
     private ProfessionReloader() {
         super("professions");
     }
@@ -32,12 +30,13 @@ public class ProfessionReloader extends DataJsonReloader<Profession> {
     }
 
     public Optional<Profession> getDataTrades(VillagerProfession profession) {
-        return getValue(new ResourceLocation(profession.name()));
+        return getValue(ResourceLocation.parse(profession.name()));
     }
 
-    public static ResourceLocation lootSequenceId(Entity entity) {
-        var lootTable = (entity instanceof LivingEntity it) ? it.getLootTable() : FALLBACK_TABLE_ID;
-        return new ResourceLocation(Constants.MOD_ID, lootTable.getNamespace() + "/" + lootTable.getPath());
+    public static Optional<ResourceLocation> lootSequenceId(Entity entity) {
+        if(!(entity instanceof LivingEntity livingEntity)) return Optional.empty();
+        var lootTable = livingEntity.getLootTable().location();
+        return Optional.of(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, lootTable.getNamespace() + "/" + lootTable.getPath()));
     }
 
     public static Optional<LootContext> createContext(Entity entity) {
