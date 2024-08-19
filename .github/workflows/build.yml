@@ -39,10 +39,10 @@ jobs:
           CHANGELOG: ${{ github.event.release.body }}
           CI: true
 
-      - name: Upload forge jar to release
+      - name: Upload neoforge jar to release
         uses: svenstaro/upload-release-action@v2
         with:
-          file: forge/build/libs/data_trades-forge-${{ github.event.release.tag_name }}.jar
+          file: forge/build/libs/data_trades-neoforge-${{ github.event.release.tag_name }}.jar
 
       - name: Upload fabric jar to release
         uses: svenstaro/upload-release-action@v2
