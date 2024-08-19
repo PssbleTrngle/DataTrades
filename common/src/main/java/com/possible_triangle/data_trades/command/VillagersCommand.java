@@ -27,7 +27,7 @@ import java.util.stream.StreamSupport;
 public class VillagersCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("villagers").requires(it -> it.hasPermission(3))
+        dispatcher.register(Commands.literal("villagers").requires(it -> it.hasPermission(2))
                 .then(Commands.literal("refresh").executes(VillagersCommand::resetAllVillagers)
                         .then(Commands.argument("target", EntityArgument.entities())
                                 .executes(VillagersCommand::resetTargetedVillagers)

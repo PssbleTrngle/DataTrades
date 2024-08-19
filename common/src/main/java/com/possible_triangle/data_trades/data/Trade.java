@@ -55,7 +55,7 @@ public record Trade(TradeIngredient wants, @Nullable TradeIngredient wants2, Tra
             int uses = GsonHelper.getAsInt(json, "uses", 0);
             int maxUses = GsonHelper.getAsInt(json, "maxUses", 10);
             int xp = GsonHelper.getAsInt(json, "xp", 1);
-            float priceMultiplier = GsonHelper.getAsFloat(json, "priceMultiplier", 2F);
+            float priceMultiplier = GsonHelper.getAsFloat(json, "priceMultiplier", 0.05F);
             int demand = GsonHelper.getAsInt(json, "demand", 0);
 
             var condition = parseCondition(json).orElseGet(() -> context -> true);
