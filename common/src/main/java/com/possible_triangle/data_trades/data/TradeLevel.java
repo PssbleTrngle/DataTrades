@@ -2,9 +2,10 @@ package com.possible_triangle.data_trades.data;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.DynamicOps;
 import com.possible_triangle.data_trades.Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -18,7 +19,7 @@ import java.util.Optional;
 
 public record TradeLevel(List<VillagerTrades.ItemListing> listings, @Nullable NumberProvider takeAmount) {
 
-    public static Optional<TradeLevel> parse(JsonObject json, ResourceLocation profession, String key) {
+    public static Optional<TradeLevel> parse(JsonObject json, ResourceLocation profession, String key, DynamicOps<JsonElement> ops) {
         try {
             var listings = new ImmutableList.Builder<VillagerTrades.ItemListing>();
 
@@ -26,14 +27,14 @@ public record TradeLevel(List<VillagerTrades.ItemListing> listings, @Nullable Nu
             for (int i = 0; i < trades.size(); i++) {
                 var element = trades.get(i);
                 var indexedId = ResourceLocation.fromNamespaceAndPath(profession.getNamespace(), "%s/%s/%s".formatted(profession.getPath(), key, i));
-                if (element.isJsonObject()) Trade.parse(element.getAsJsonObject(), indexedId).ifPresent(listings::add);
+                if (element.isJsonObject()) Trade.parse(element.getAsJsonObject(), indexedId, ops).ifPresent(listings::add);
                 else listings.add(new ReferenceTrade(ResourceLocation.parse(element.getAsString())));
             }
 
-            var takeAmount = json.has("take") ? NumberProviders.CODEC.parse(JsonOps.INSTANCE, json.get("take")).getOrThrow() : null;
+            var takeAmount = json.has("take") ? NumberProviders.CODEC.parse(ops, json.get("take")).getOrThrow() : null;
 
             return Optional.of(new TradeLevel(listings.build(), takeAmount));
-        } catch (JsonSyntaxException ex) {
+        } catch (JsonSyntaxException | IllegalStateException ex) {
             Constants.LOGGER.error("Error loading trade {} for '{}': {}", key, profession, ex.getMessage());
             return Optional.empty();
         }

@@ -22,17 +22,17 @@ public class NeoforgeEntrypoint {
         NeoforgePlatformHelper.ITEM_FUNCTIONS.register(modBus);
 
         NeoForge.EVENT_BUS.addListener((AddReloadListenerEvent event) -> {
-            CommonClass.register((id, it) -> event.addListener(it));
+            CommonClass.register((id, factory) -> event.addListener(factory.apply(event.getRegistryAccess())));
         });
 
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, (VillagerTradesEvent event) -> {
-            ProfessionReloader.INSTANCE.getDataTrades(event.getType()).ifPresent(it -> it.trades().forEach((level, trades) -> {
+            ProfessionReloader.INSTANCE.get().getDataTrades(event.getType()).ifPresent(it -> it.trades().forEach((level, trades) -> {
                 event.getTrades().put(level.intValue(), trades.listings());
             }));
         });
 
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, (WandererTradesEvent event) -> {
-            TraderReloader.INSTANCE.getTrader().ifPresent(trader -> {
+            TraderReloader.INSTANCE.get().getTrader().ifPresent(trader -> {
                 if(trader.genericTrades() != null) {
                     event.getGenericTrades().clear();
                     event.getGenericTrades().addAll(trader.genericTrades().listings());

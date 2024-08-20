@@ -42,7 +42,7 @@ public class FabricTradeManager {
         var defaultVillagerTrades = CACHED_VILLAGER_TRADES.get();
 
         defaultVillagerTrades.forEach((profession, levels) -> {
-            var villager = ProfessionReloader.INSTANCE.getDataTrades(profession);
+            var villager = ProfessionReloader.INSTANCE.get().getDataTrades(profession);
             var map = new Int2ObjectOpenHashMap<VillagerTrades.ItemListing[]>();
             levels.keySet().forEach(level ->
                     map.put(level, villager.map(it -> it.trades().get(level))
@@ -53,7 +53,7 @@ public class FabricTradeManager {
             VillagerTrades.TRADES.put(profession, map);
         });
 
-        var trader = TraderReloader.INSTANCE.getTrader();
+        var trader = TraderReloader.INSTANCE.get().getTrader();
         VillagerTrades.WANDERING_TRADER_TRADES.put(1, trader.map(Trader::genericTrades)
                 .map(TradeLevel::listingsArray)
                 .orElseGet(() -> defaultWanderingTrades.get(1))

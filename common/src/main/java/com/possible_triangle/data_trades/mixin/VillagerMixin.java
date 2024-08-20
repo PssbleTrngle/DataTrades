@@ -12,7 +12,7 @@ public abstract class VillagerMixin {
     @ModifyConstant(method = "updateTrades()V", constant = @Constant(intValue = 2))
     private int injected(int value) {
         var self = (Villager) (Object) this;
-        return ProfessionReloader.INSTANCE.takeTradesAmount(self, self.getVillagerData().getLevel()).orElse(value);
+        return ProfessionReloader.INSTANCE.get().takeTradesAmount(self, self.getVillagerData().getLevel()).orElse(value);
     }
 
 }

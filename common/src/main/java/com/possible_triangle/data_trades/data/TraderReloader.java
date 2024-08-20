@@ -1,6 +1,9 @@
 package com.possible_triangle.data_trades.data;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.DynamicOps;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.WanderingTrader;
 
@@ -10,17 +13,17 @@ import java.util.function.Function;
 
 public class TraderReloader extends DataJsonReloader<Trader> {
 
-    public static final TraderReloader INSTANCE = new TraderReloader();
+    public static final ListenerInstance<TraderReloader> INSTANCE = new ListenerInstance<>(TraderReloader::new);
 
     private static final ResourceLocation WANDERING_TRADER = ResourceLocation.withDefaultNamespace("wandering");
 
-    private TraderReloader() {
-        super("traders");
+    private TraderReloader(HolderLookup.Provider lookup) {
+        super("traders", lookup);
     }
 
     @Override
-    protected Optional<Trader> parse(JsonObject json, ResourceLocation id) {
-        return Trader.parse(json, id);
+    protected Optional<Trader> parse(JsonObject json, ResourceLocation id, DynamicOps<JsonElement> ops) {
+        return Trader.parse(json, id, ops);
     }
 
     public Optional<Trader> getTrader() {

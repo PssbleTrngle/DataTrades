@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 
@@ -26,9 +27,11 @@ public class FabricEntrypoint implements ModInitializer {
         );
 
         var manager = ResourceManagerHelper.get(PackType.SERVER_DATA);
-        CommonClass.register((name, inner) -> {
+        CommonClass.register((name, factory) -> {
             var id = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
-            manager.registerReloadListener(new IdentifiableResourceReloadListener() {
+            manager.registerReloadListener(id, lookup -> new IdentifiableResourceReloadListener() {
+
+                private final PreparableReloadListener inner = factory.apply(lookup);
 
                 @Override
                 public ResourceLocation getFabricId() {

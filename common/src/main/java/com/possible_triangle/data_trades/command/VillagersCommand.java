@@ -65,7 +65,7 @@ public class VillagersCommand {
 
         {
             var trades = VillagerTrades.WANDERING_TRADER_TRADES.get(1);
-            var tradeCount = TraderReloader.INSTANCE.takeTradesAmount(trader, Trader::genericTrades).orElse(5);
+            var tradeCount = TraderReloader.INSTANCE.get().takeTradesAmount(trader, Trader::genericTrades).orElse(5);
 
             var shuffled = Arrays.asList(trades);
             Collections.shuffle(shuffled, new Random(trader.getRandom().nextLong()));
@@ -77,7 +77,7 @@ public class VillagersCommand {
 
         {
             var trades = VillagerTrades.WANDERING_TRADER_TRADES.get(2);
-            var tradeCount = TraderReloader.INSTANCE.takeTradesAmount(trader, Trader::rareTrades).orElse(1);
+            var tradeCount = TraderReloader.INSTANCE.get().takeTradesAmount(trader, Trader::rareTrades).orElse(1);
 
             var shuffled = Arrays.asList(trades);
             Collections.shuffle(shuffled, new Random(trader.getRandom().nextLong()));
@@ -101,7 +101,7 @@ public class VillagersCommand {
 
         for (int level = 1; level <= data.getLevel(); level++) {
             var listings = trades.get(level);
-            var tradeCount = ProfessionReloader.INSTANCE.takeTradesAmount(villager, level).orElse(2);
+            var tradeCount = ProfessionReloader.INSTANCE.get().takeTradesAmount(villager, level).orElse(2);
             if (listings == null) continue;
 
             var shuffled = Arrays.asList(listings);

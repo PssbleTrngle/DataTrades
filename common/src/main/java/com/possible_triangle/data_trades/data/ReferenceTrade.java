@@ -26,7 +26,7 @@ public class ReferenceTrade implements VillagerTrades.ItemListing {
     @Override
     public MerchantOffer getOffer(Entity entity, RandomSource randomSource) {
         if (referenced == null) {
-            referenced = TradesReloader.INSTANCE.getTrade(id);
+            referenced = TradesReloader.INSTANCE.get().getTrade(id);
             if (referenced.isEmpty()) Constants.LOGGER.warn("Could not find data-trade '{}'", id);
         }
         return referenced.map(it -> it.getOffer(entity, randomSource)).orElse(null);

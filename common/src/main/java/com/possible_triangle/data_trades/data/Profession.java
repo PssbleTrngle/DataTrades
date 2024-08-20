@@ -1,7 +1,9 @@
 package com.possible_triangle.data_trades.data;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.DynamicOps;
 import com.possible_triangle.data_trades.Constants;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -12,7 +14,7 @@ import java.util.Optional;
 
 public record Profession(boolean disabled, Int2ObjectMap<TradeLevel> trades) {
 
-    public static Optional<Profession> parse(JsonObject json, ResourceLocation id) {
+    public static Optional<Profession> parse(JsonObject json, ResourceLocation id, DynamicOps<JsonElement> ops) {
         try {
             var disabled = GsonHelper.getAsBoolean(json, "disabled", false);
 
@@ -22,7 +24,7 @@ public record Profession(boolean disabled, Int2ObjectMap<TradeLevel> trades) {
 
             levels.entrySet().forEach(entry -> {
                 var level = Integer.parseInt(entry.getKey());
-                TradeLevel.parse(entry.getValue().getAsJsonObject(), id, "level-" + level).ifPresent(parsed -> {
+                TradeLevel.parse(entry.getValue().getAsJsonObject(), id, "level-" + level, ops).ifPresent(parsed -> {
                     trades.put(level, parsed);
                 });
             });
@@ -30,7 +32,7 @@ public record Profession(boolean disabled, Int2ObjectMap<TradeLevel> trades) {
             if (trades.isEmpty()) return Optional.empty();
 
             return Optional.of(new Profession(disabled, trades));
-        } catch (JsonSyntaxException ex) {
+        } catch (JsonSyntaxException | IllegalStateException ex) {
             Constants.LOGGER.error("Error loading profession '{}': {}", id, ex.getMessage());
             return Optional.empty();
         }

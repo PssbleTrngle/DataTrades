@@ -1,7 +1,10 @@
 package com.possible_triangle.data_trades.data;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.DynamicOps;
 import com.possible_triangle.data_trades.Constants;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -18,15 +21,15 @@ import java.util.OptionalInt;
 
 public class ProfessionReloader extends DataJsonReloader<Profession> {
 
-    public static final ProfessionReloader INSTANCE = new ProfessionReloader();
+    public static final ListenerInstance<ProfessionReloader> INSTANCE = new ListenerInstance<>(ProfessionReloader::new);
 
-    private ProfessionReloader() {
-        super("professions");
+    private ProfessionReloader(HolderLookup.Provider lookup) {
+        super("professions", lookup);
     }
 
     @Override
-    protected Optional<Profession> parse(JsonObject json, ResourceLocation id) {
-        return Profession.parse(json, id);
+    protected Optional<Profession> parse(JsonObject json, ResourceLocation id, DynamicOps<JsonElement> ops) {
+        return Profession.parse(json, id, ops);
     }
 
     public Optional<Profession> getDataTrades(VillagerProfession profession) {
